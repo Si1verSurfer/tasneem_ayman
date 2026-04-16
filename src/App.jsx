@@ -128,9 +128,7 @@ function App() {
         <p className="hero__eyebrow">بسم الله الرحمن الرحيم</p>
         <h1 className="hero__name">تسنيم أيمن</h1>
         <p className="hero__rahma">رحمها الله تعالى</p>
-        <div className="hero__divider" aria-hidden="true">
-          <span className="hero__dividerDot" />
-        </div>
+        <div className="hero__divider" aria-hidden="true" />
         <p className="hero__intro">
           هذه الصفحة صدقة جارية على روحها — نسأل الله أن يتقبل منا ومنكم{' '}
           <strong>الدعاء لها</strong>، وأن يجعل ما يُقرأ ويُهدى ثوابُه لها نورًا في قبرها
