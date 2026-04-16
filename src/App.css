@@ -1,0 +1,277 @@
+.page {
+  max-width: 42rem;
+  margin: 0 auto;
+  width: 100%;
+  min-height: 100svh;
+  min-height: 100dvh;
+  padding-top: max(1.75rem, env(safe-area-inset-top));
+  padding-bottom: max(2.5rem, env(safe-area-inset-bottom));
+  padding-inline: max(1rem, env(safe-area-inset-left)) max(1rem, env(safe-area-inset-right));
+}
+
+.hero {
+  text-align: center;
+  margin-bottom: clamp(1.5rem, 5vw, 2.5rem);
+}
+
+.hero__eyebrow {
+  font-size: 0.95rem;
+  color: var(--accent);
+  margin: 0 0 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+}
+
+.hero__name {
+  font-family: 'Amiri', 'Noto Naskh Arabic', serif;
+  font-size: clamp(1.65rem, 7vw, 2.75rem);
+  font-weight: 700;
+  color: var(--text);
+  margin: 0 0 0.35rem;
+  line-height: 1.25;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+}
+
+.hero__rahma {
+  font-size: 1.2rem;
+  color: var(--gold);
+  margin: 0 0 1.5rem;
+  font-weight: 600;
+}
+
+.hero__divider {
+  width: 4rem;
+  height: 3px;
+  background: linear-gradient(90deg, transparent, var(--gold), transparent);
+  margin: 0 auto 1.5rem;
+  border-radius: 2px;
+}
+
+.hero__intro,
+.hero__source {
+  text-align: justify;
+  text-align-last: center;
+  color: var(--text-muted);
+  margin: 0 0 1rem;
+  font-size: clamp(0.9rem, 3.5vw, 0.98rem);
+  line-height: 1.85;
+  max-width: 100%;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+}
+
+.hero__source {
+  margin-bottom: 0;
+  font-size: 0.9rem;
+  opacity: 0.95;
+}
+
+.hero__call {
+  margin: 0 0 1.1rem;
+  padding: 1rem 1.1rem;
+  text-align: center;
+  font-size: clamp(0.92rem, 3.4vw, 1rem);
+  line-height: 1.8;
+  color: var(--text);
+  background: var(--accent-soft);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  max-width: 100%;
+}
+
+.hero__callLabel {
+  display: block;
+  font-family: 'Amiri', 'Noto Naskh Arabic', serif;
+  font-size: clamp(1.15rem, 4vw, 1.35rem);
+  font-weight: 700;
+  color: var(--accent);
+  margin-bottom: 0.5rem;
+}
+
+.invite {
+  margin-bottom: clamp(1.25rem, 4vw, 1.75rem);
+  padding: clamp(1.15rem, 3.5vw, 1.4rem);
+  background: var(--bg-card);
+  border: 2px solid var(--accent);
+  border-radius: 14px;
+  box-shadow: var(--shadow);
+}
+
+.invite__title {
+  font-family: 'Amiri', 'Noto Naskh Arabic', serif;
+  font-size: clamp(1.12rem, 4vw, 1.3rem);
+  font-weight: 700;
+  color: var(--accent);
+  margin: 0 0 0.65rem;
+  text-align: center;
+  line-height: 1.35;
+}
+
+.invite__lead {
+  margin: 0 0 1rem;
+  font-size: clamp(0.88rem, 3.2vw, 0.95rem);
+  color: var(--text-muted);
+  text-align: center;
+  line-height: 1.75;
+}
+
+.invite__list {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.invite__item {
+  margin: 0;
+  padding: 0;
+}
+
+.invite__dua {
+  display: block;
+  font-family: 'Amiri', 'Noto Naskh Arabic', serif;
+  font-size: clamp(0.95rem, 3.5vw, 1.05rem);
+  line-height: 2;
+  text-align: justify;
+  text-justify: inter-word;
+  padding: 0.75rem 0.85rem;
+  background: var(--accent-soft);
+  border-radius: 10px;
+  border-inline-start: 4px solid var(--accent);
+}
+
+.content {
+  display: flex;
+  flex-direction: column;
+  gap: clamp(1rem, 3vw, 1.25rem);
+}
+
+.card {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: clamp(1.1rem, 3.5vw, 1.35rem) clamp(1rem, 3.5vw, 1.25rem);
+  box-shadow: var(--shadow);
+  max-width: 100%;
+  min-width: 0;
+}
+
+.card--closing {
+  border-color: var(--accent);
+  background: var(--accent-soft);
+}
+
+.card__title {
+  font-size: clamp(1.02rem, 3.8vw, 1.15rem);
+  font-weight: 700;
+  color: var(--accent);
+  margin: 0 0 0.35rem;
+  line-height: 1.4;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+}
+
+.card__source {
+  font-size: clamp(0.78rem, 2.8vw, 0.82rem);
+  color: var(--text-muted);
+  margin: 0 0 1rem;
+  line-height: 1.55;
+}
+
+.card__arabic {
+  font-family: 'Amiri', 'Noto Naskh Arabic', serif;
+  font-size: clamp(0.95rem, 3.6vw, 1.05rem);
+  line-height: 2.1;
+  margin: 0;
+  text-align: justify;
+  text-justify: inter-word;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+}
+
+.card__arabic--small {
+  font-size: clamp(0.92rem, 3.4vw, 1rem);
+}
+
+.card__note {
+  margin: 1rem 0 0;
+  padding-top: 0.85rem;
+  border-top: 1px dashed var(--border);
+  font-size: clamp(0.82rem, 3vw, 0.88rem);
+  color: var(--text-muted);
+  line-height: 1.75;
+  text-align: justify;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+}
+
+.card__note--closing {
+  margin-top: 1rem;
+  border-top: 1px dashed var(--border);
+  padding-top: 0.85rem;
+}
+
+.footer {
+  margin-top: clamp(1.75rem, 5vw, 2.5rem);
+  padding-top: 1.5rem;
+  border-top: 1px solid var(--border);
+  text-align: center;
+  font-size: clamp(0.82rem, 3vw, 0.88rem);
+  color: var(--text-muted);
+  padding-inline: 0.25rem;
+}
+
+.footer p {
+  margin: 0;
+}
+
+.footer__share {
+  margin-top: 0.65rem;
+  font-size: clamp(0.78rem, 2.9vw, 0.85rem);
+  line-height: 1.65;
+}
+
+@media (max-width: 480px) {
+  .hero__rahma {
+    font-size: clamp(1.05rem, 4vw, 1.2rem);
+  }
+
+  .hero__intro,
+  .hero__source,
+  .hero__call {
+    text-align: start;
+    text-align-last: unset;
+    line-height: 1.82;
+  }
+
+  .hero__call {
+    text-align: start;
+  }
+
+  .hero__callLabel {
+    text-align: center;
+  }
+
+  .invite__lead {
+    text-align: start;
+  }
+
+  .card__arabic {
+    line-height: 2.05;
+  }
+}
+
+@media (max-width: 360px) {
+  .page {
+    padding-inline: max(0.75rem, env(safe-area-inset-left))
+      max(0.75rem, env(safe-area-inset-right));
+  }
+
+  .card {
+    border-radius: 10px;
+    padding-inline: 0.85rem;
+  }
+}
