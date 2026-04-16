@@ -7,45 +7,142 @@
   padding-top: max(1.75rem, env(safe-area-inset-top));
   padding-bottom: max(2.5rem, env(safe-area-inset-bottom));
   padding-inline: max(1rem, env(safe-area-inset-left)) max(1rem, env(safe-area-inset-right));
+  position: relative;
+}
+
+/* شريط علوي ذهبي — إيقاع بسيط */
+.page::before {
+  content: '';
+  display: block;
+  height: 5px;
+  margin: 0 auto 1.25rem;
+  max-width: min(100%, 36rem);
+  border-radius: 2px;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    var(--gold-mid) 15%,
+    var(--emerald-mid) 50%,
+    var(--gold-mid) 85%,
+    transparent
+  );
+  box-shadow: 0 1px 0 var(--border-gold);
 }
 
 .hero {
   text-align: center;
   margin-bottom: clamp(1.5rem, 5vw, 2.5rem);
+  padding: clamp(1.35rem, 4vw, 1.85rem) clamp(1rem, 3vw, 1.5rem) clamp(1.5rem, 4vw, 2rem);
+  background: linear-gradient(
+    165deg,
+    var(--bg-card) 0%,
+    var(--bg-card-warm) 45%,
+    var(--bg-card) 100%
+  );
+  border: 1px solid var(--border-gold);
+  border-radius: 6px;
+  box-shadow: var(--shadow), var(--shadow-gold), inset 0 1px 0 rgba(255, 255, 255, 0.65);
+  position: relative;
+}
+
+@media (prefers-color-scheme: dark) {
+  .hero {
+    box-shadow: var(--shadow), inset 0 1px 0 rgba(255, 255, 255, 0.04);
+  }
+}
+
+/* إطار داخلي ذهبي بسيط */
+.hero::before {
+  content: '';
+  position: absolute;
+  inset: 10px;
+  border: 1px solid var(--gold-faint);
+  border-radius: 3px;
+  pointer-events: none;
+  opacity: 0.85;
+}
+
+.hero > * {
+  position: relative;
+  z-index: 1;
 }
 
 .hero__eyebrow {
   font-size: 0.95rem;
-  color: var(--accent);
-  margin: 0 0 0.75rem;
+  color: var(--emerald-mid);
+  margin: 0 0 0.85rem;
   font-weight: 600;
-  letter-spacing: 0.02em;
+  letter-spacing: 0.04em;
+}
+
+.hero__eyebrow::before,
+.hero__eyebrow::after {
+  content: '';
+  display: inline-block;
+  width: 7px;
+  height: 7px;
+  background: linear-gradient(135deg, var(--gold-mid), var(--gold));
+  transform: rotate(45deg);
+  margin: 0 0.65rem;
+  vertical-align: middle;
+  opacity: 0.75;
+  box-shadow: 0 0 0 1px var(--border-gold);
 }
 
 .hero__name {
   font-family: 'Amiri', 'Noto Naskh Arabic', serif;
-  font-size: clamp(1.65rem, 7vw, 2.75rem);
+  font-size: clamp(1.65rem, 7vw, 2.85rem);
   font-weight: 700;
-  color: var(--text);
-  margin: 0 0 0.35rem;
-  line-height: 1.25;
+  color: var(--emerald);
+  margin: 0 0 0.4rem;
+  line-height: 1.2;
   word-wrap: break-word;
   overflow-wrap: break-word;
+  text-shadow: 0 1px 0 rgba(255, 255, 255, 0.4);
+}
+
+@media (prefers-color-scheme: dark) {
+  .hero__name {
+    color: var(--gold-bright);
+    text-shadow: 0 2px 12px rgba(0, 0, 0, 0.4);
+  }
 }
 
 .hero__rahma {
   font-size: 1.2rem;
-  color: var(--gold);
-  margin: 0 0 1.5rem;
+  color: var(--gold-mid);
+  margin: 0 0 1.25rem;
   font-weight: 600;
+  letter-spacing: 0.02em;
 }
 
 .hero__divider {
-  width: 4rem;
-  height: 3px;
-  background: linear-gradient(90deg, transparent, var(--gold), transparent);
-  margin: 0 auto 1.5rem;
-  border-radius: 2px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.35rem;
+  margin: 0 auto 1.35rem;
+  max-width: 12rem;
+  height: 14px;
+  color: var(--gold-mid);
+}
+
+.hero__divider::before,
+.hero__divider::after {
+  content: '';
+  flex: 1;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, var(--gold-mid), transparent);
+  border-radius: 1px;
+}
+
+.hero__dividerDot {
+  width: 8px;
+  height: 8px;
+  background: linear-gradient(135deg, var(--gold-bright), var(--gold));
+  transform: rotate(45deg);
+  flex-shrink: 0;
+  box-shadow: 0 0 0 1px var(--border-gold);
 }
 
 .hero__intro,
@@ -74,10 +171,11 @@
   font-size: clamp(0.92rem, 3.4vw, 1rem);
   line-height: 1.8;
   color: var(--text);
-  background: var(--accent-soft);
-  border: 1px solid var(--border);
-  border-radius: 12px;
+  background: linear-gradient(180deg, var(--accent-soft), var(--accent-softer));
+  border: 1px solid var(--border-gold);
+  border-radius: 8px;
   max-width: 100%;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.35);
 }
 
 .hero__callLabel {
@@ -85,24 +183,49 @@
   font-family: 'Amiri', 'Noto Naskh Arabic', serif;
   font-size: clamp(1.15rem, 4vw, 1.35rem);
   font-weight: 700;
-  color: var(--accent);
+  color: var(--emerald-mid);
   margin-bottom: 0.5rem;
+}
+
+@media (prefers-color-scheme: dark) {
+  .hero__callLabel {
+    color: var(--emerald);
+  }
 }
 
 .invite {
   margin-bottom: clamp(1.25rem, 4vw, 1.75rem);
-  padding: clamp(1.15rem, 3.5vw, 1.4rem);
+  padding: clamp(1.15rem, 3.5vw, 1.5rem);
   background: var(--bg-card);
-  border: 2px solid var(--accent);
-  border-radius: 14px;
+  border: 2px solid transparent;
+  border-radius: 8px;
+  background-image:
+    linear-gradient(var(--bg-card), var(--bg-card)),
+    linear-gradient(135deg, var(--gold-mid), var(--emerald-mid), var(--gold-mid));
+  background-origin: border-box;
+  background-clip: padding-box, border-box;
   box-shadow: var(--shadow);
+  position: relative;
+}
+
+.invite::after {
+  content: '';
+  position: absolute;
+  bottom: 0.65rem;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 3rem;
+  height: 3px;
+  background: linear-gradient(90deg, transparent, var(--gold-mid), transparent);
+  opacity: 0.5;
+  border-radius: 2px;
 }
 
 .invite__title {
   font-family: 'Amiri', 'Noto Naskh Arabic', serif;
   font-size: clamp(1.12rem, 4vw, 1.3rem);
   font-weight: 700;
-  color: var(--accent);
+  color: var(--emerald-mid);
   margin: 0 0 0.65rem;
   text-align: center;
   line-height: 1.35;
@@ -137,10 +260,11 @@
   line-height: 2;
   text-align: justify;
   text-justify: inter-word;
-  padding: 0.75rem 0.85rem;
-  background: var(--accent-soft);
-  border-radius: 10px;
-  border-inline-start: 4px solid var(--accent);
+  padding: 0.75rem 0.9rem;
+  background: linear-gradient(90deg, var(--accent-softer), transparent);
+  border-radius: 8px;
+  border-inline-start: 4px solid var(--gold-mid);
+  box-shadow: inset 0 0 0 1px var(--gold-faint);
 }
 
 .content {
@@ -152,22 +276,59 @@
 .card {
   background: var(--bg-card);
   border: 1px solid var(--border);
-  border-radius: 12px;
-  padding: clamp(1.1rem, 3.5vw, 1.35rem) clamp(1rem, 3.5vw, 1.25rem);
+  border-radius: 10px;
+  padding: clamp(1.15rem, 3.5vw, 1.4rem) clamp(1rem, 3.5vw, 1.25rem);
+  padding-top: calc(0.35rem + clamp(1.15rem, 3.5vw, 1.4rem));
   box-shadow: var(--shadow);
   max-width: 100%;
   min-width: 0;
+  position: relative;
+  overflow: hidden;
+}
+
+.card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: linear-gradient(
+    90deg,
+    var(--emerald-mid),
+    var(--gold-mid) 35%,
+    var(--gold-bright) 50%,
+    var(--gold-mid) 65%,
+    var(--emerald-mid)
+  );
+  opacity: 0.92;
+}
+
+.card::after {
+  content: '';
+  position: absolute;
+  top: 4px;
+  left: 1rem;
+  right: 1rem;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--gold-faint), transparent);
+  opacity: 0.8;
 }
 
 .card--closing {
-  border-color: var(--accent);
-  background: var(--accent-soft);
+  border-color: var(--border-gold);
+  background: linear-gradient(180deg, var(--accent-soft), var(--bg-card));
+}
+
+.card--closing::before {
+  height: 5px;
+  background: linear-gradient(90deg, var(--gold), var(--emerald-mid), var(--gold));
 }
 
 .card__title {
   font-size: clamp(1.02rem, 3.8vw, 1.15rem);
   font-weight: 700;
-  color: var(--accent);
+  color: var(--emerald-mid);
   margin: 0 0 0.35rem;
   line-height: 1.4;
   word-wrap: break-word;
@@ -190,6 +351,7 @@
   text-justify: inter-word;
   word-wrap: break-word;
   overflow-wrap: break-word;
+  color: var(--text);
 }
 
 .card__arabic--small {
@@ -199,7 +361,7 @@
 .card__note {
   margin: 1rem 0 0;
   padding-top: 0.85rem;
-  border-top: 1px dashed var(--border);
+  border-top: 1px dashed var(--border-gold);
   font-size: clamp(0.82rem, 3vw, 0.88rem);
   color: var(--text-muted);
   line-height: 1.75;
@@ -210,18 +372,36 @@
 
 .card__note--closing {
   margin-top: 1rem;
-  border-top: 1px dashed var(--border);
+  border-top: 1px dashed var(--border-gold);
   padding-top: 0.85rem;
 }
 
 .footer {
   margin-top: clamp(1.75rem, 5vw, 2.5rem);
-  padding-top: 1.5rem;
-  border-top: 1px solid var(--border);
+  padding-top: 1.75rem;
   text-align: center;
   font-size: clamp(0.82rem, 3vw, 0.88rem);
   color: var(--text-muted);
   padding-inline: 0.25rem;
+  position: relative;
+}
+
+.footer::before {
+  content: '';
+  display: block;
+  width: min(100%, 16rem);
+  height: 12px;
+  margin: 0 auto 1.25rem;
+  background: repeating-linear-gradient(
+    90deg,
+    var(--gold-mid),
+    var(--gold-mid) 2px,
+    transparent 2px,
+    transparent 10px
+  );
+  opacity: 0.35;
+  mask-image: linear-gradient(90deg, transparent, black 20%, black 80%, transparent);
+  -webkit-mask-image: linear-gradient(90deg, transparent, black 20%, black 80%, transparent);
 }
 
 .footer p {
@@ -271,7 +451,11 @@
   }
 
   .card {
-    border-radius: 10px;
+    border-radius: 8px;
+    padding-inline: 0.85rem;
+  }
+
+  .hero {
     padding-inline: 0.85rem;
   }
 }

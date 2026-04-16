@@ -10,15 +10,28 @@ html {
 }
 
 :root {
-  --bg: #f8f5f0;
-  --bg-card: #fffcf8;
-  --text: #3d3832;
-  --text-muted: #6b6560;
-  --accent: #1e6b5e;
-  --accent-soft: rgba(30, 107, 94, 0.12);
-  --gold: #b8956a;
-  --border: #e8e0d6;
-  --shadow: 0 8px 32px rgba(61, 56, 50, 0.08);
+  /* ألوان مستوحاة من الخط والزخرفة الإسلامية: زمردي، نحاسي، رق */
+  --bg: #f5f0e6;
+  --bg-deep: #ebe4d6;
+  --bg-card: #fffdf8;
+  --bg-card-warm: #faf6ef;
+  --text: #2c2824;
+  --text-muted: #5c564d;
+  --emerald: #0c4a3e;
+  --emerald-mid: #145a4a;
+  --emerald-soft: #1e6b5a;
+  --accent: var(--emerald-soft);
+  --accent-soft: rgba(20, 90, 74, 0.1);
+  --accent-softer: rgba(20, 90, 74, 0.06);
+  --gold: #a67c32;
+  --gold-mid: #c9a44a;
+  --gold-bright: #d4b060;
+  --gold-faint: rgba(166, 124, 50, 0.22);
+  --border: #e2d8c8;
+  --border-gold: rgba(166, 124, 50, 0.35);
+  --shadow: 0 10px 40px rgba(12, 74, 62, 0.07);
+  --shadow-gold: 0 4px 24px rgba(166, 124, 50, 0.12);
+  --pattern-fg: rgba(12, 74, 62, 0.045);
 
   font-family: 'Noto Naskh Arabic', 'Amiri', Georgia, serif;
   font-size: clamp(16px, 2.8vw, 18px);
@@ -32,15 +45,27 @@ html {
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --bg: #141816;
-    --bg-card: #1c211f;
-    --text: #e8e4df;
-    --text-muted: #a39d96;
-    --accent: #5eb5a3;
-    --accent-soft: rgba(94, 181, 163, 0.15);
-    --gold: #c9a87a;
-    --border: #2d3330;
-    --shadow: 0 8px 32px rgba(0, 0, 0, 0.35);
+    --bg: #0f1412;
+    --bg-deep: #0a0e0c;
+    --bg-card: #161c19;
+    --bg-card-warm: #1a221e;
+    --text: #ebe6df;
+    --text-muted: #a39a8f;
+    --emerald: #5eb5a3;
+    --emerald-mid: #4a9d8d;
+    --emerald-soft: #6bc4b0;
+    --accent: var(--emerald-mid);
+    --accent-soft: rgba(94, 181, 163, 0.14);
+    --accent-softer: rgba(94, 181, 163, 0.08);
+    --gold: #c9a85c;
+    --gold-mid: #d4b56e;
+    --gold-bright: #e0c47a;
+    --gold-faint: rgba(201, 168, 92, 0.2);
+    --border: #2a332f;
+    --border-gold: rgba(201, 168, 92, 0.28);
+    --shadow: 0 12px 48px rgba(0, 0, 0, 0.45);
+    --shadow-gold: 0 4px 28px rgba(0, 0, 0, 0.35);
+    --pattern-fg: rgba(94, 181, 163, 0.04);
   }
 }
 
@@ -49,6 +74,35 @@ body {
   min-height: 100svh;
   min-height: 100dvh;
   overflow-x: hidden;
+  background-color: var(--bg);
+  /* شبكة هندسية خفيفة (إيقاع مشبكي) */
+  background-image:
+    linear-gradient(
+      135deg,
+      var(--pattern-fg) 25%,
+      transparent 25%,
+      transparent 75%,
+      var(--pattern-fg) 75%
+    ),
+    linear-gradient(
+      135deg,
+      var(--pattern-fg) 25%,
+      transparent 25%,
+      transparent 75%,
+      var(--pattern-fg) 75%
+    ),
+    radial-gradient(ellipse 120% 80% at 50% -20%, var(--accent-softer), transparent 55%),
+    radial-gradient(ellipse 80% 50% at 100% 100%, var(--gold-faint), transparent 45%);
+  background-size:
+    28px 28px,
+    28px 28px,
+    100% 100%,
+    100% 100%;
+  background-position:
+    0 0,
+    14px 14px,
+    0 0,
+    0 0;
 }
 
 #root {
