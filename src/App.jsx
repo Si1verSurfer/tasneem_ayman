@@ -1,4 +1,16 @@
+import { useEffect, useState } from 'preact/hooks'
 import './App.css'
+
+/** عدّاد عام عبر CountAPI — يزيد عند كل تحميل للصفحة */
+const VISITOR_COUNT_URL =
+  import.meta.env.VITE_COUNTER_URL ||
+  'https://api.countapi.xyz/hit/tasneem-ayman-memorial/visits'
+
+const ARABIC_DIGITS = ['٠', '١', '٢', '٣', '٤', '٥', '٦', '٧', '٨', '٩']
+
+function toArabicNumerals(num) {
+  return String(num).replace(/\d/g, (d) => ARABIC_DIGITS[Number(d)])
+}
 
 const inviteDuasForHer = [
   'اللَّهُمَّ اغْفِرْ لَهَا وَارْحَمْهَا وَعَافِهَا وَاعْفُ عَنْهَا',
@@ -122,6 +134,28 @@ const sections = [
 ]
 
 function App() {
+  const [visitCount, setVisitCount] = useState(null)
+  const [visitLoading, setVisitLoading] = useState(true)
+
+  useEffect(() => {
+    let cancelled = false
+    fetch(VISITOR_COUNT_URL, { method: 'GET', cache: 'no-store' })
+      .then((r) => (r.ok ? r.json() : Promise.reject()))
+      .then((data) => {
+        if (cancelled || typeof data?.value !== 'number') return
+        setVisitCount(data.value)
+      })
+      .catch(() => {
+        if (!cancelled) setVisitCount(null)
+      })
+      .finally(() => {
+        if (!cancelled) setVisitLoading(false)
+      })
+    return () => {
+      cancelled = true
+    }
+  }, [])
+
   return (
     <div className="page">
       <header className="hero">
@@ -185,6 +219,25 @@ function App() {
       </main>
 
       <footer className="footer">
+        <p
+          className="footer__visits"
+          role="status"
+          aria-live="polite"
+          aria-label="عدد زيارات الصفحة"
+        >
+          {visitLoading ? (
+            <span className="footer__visitsNum footer__visitsNum--muted">…</span>
+          ) : visitCount != null ? (
+            <>
+              <span className="footer__visitsLabel">زيارات الصفحة</span>{' '}
+              <span className="footer__visitsNum" dir="ltr">
+                {toArabicNumerals(visitCount)}
+              </span>
+            </>
+          ) : (
+            <span className="footer__visitsNum footer__visitsNum--muted">عدد الزيارات غير متاح</span>
+          )}
+        </p>
         <p>صدقة جارية — لا تنسَها من دعائك الصالح لها</p>
         <p className="footer__share">بارك الله فيك: ادعُ لها وذكّر غيرك ليزيد الدعاء لها.</p>
       </footer>
