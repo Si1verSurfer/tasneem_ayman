@@ -1,15 +1,29 @@
 import { useEffect, useState } from 'preact/hooks'
 import './App.css'
 
-/** عدّاد عام عبر CountAPI — يزيد عند كل تحميل للصفحة */
+/**
+ * عدّاد الزيارات عبر hits.dwyl (يزيد عند كل طلب JSON).
+ * في المتصفح: طلب مباشر إلى dwyl يُحظر غالباً بسبب CORS، لذلك نستخدم /api/visit
+ * (Vercel api/ أو Netlify Function + إعادة توجيه) أو وكيل Vite في التطوير.
+ */
 const VISITOR_COUNT_URL =
-  import.meta.env.VITE_COUNTER_URL ||
-  'https://api.countapi.xyz/hit/tasneem-ayman-memorial/visits'
+  import.meta.env.VITE_COUNTER_URL || '/api/visit'
 
 const ARABIC_DIGITS = ['٠', '١', '٢', '٣', '٤', '٥', '٦', '٧', '٨', '٩']
 
 function toArabicNumerals(num) {
   return String(num).replace(/\d/g, (d) => ARABIC_DIGITS[Number(d)])
+}
+
+/** يدعم CountAPI { value } و dwyl/shields { message } */
+function parseCountPayload(data) {
+  if (data == null || typeof data !== 'object') return null
+  if (typeof data.value === 'number' && Number.isFinite(data.value)) return data.value
+  if (data.message != null) {
+    const n = parseInt(String(data.message).replace(/[^\d]/g, ''), 10)
+    if (Number.isFinite(n)) return n
+  }
+  return null
 }
 
 const inviteDuasForHer = [
@@ -139,11 +153,12 @@ function App() {
 
   useEffect(() => {
     let cancelled = false
-    fetch(VISITOR_COUNT_URL, { method: 'GET', cache: 'no-store' })
+    fetch(VISITOR_COUNT_URL, { method: 'GET', cache: 'no-store', mode: 'cors' })
       .then((r) => (r.ok ? r.json() : Promise.reject()))
       .then((data) => {
-        if (cancelled || typeof data?.value !== 'number') return
-        setVisitCount(data.value)
+        if (cancelled) return
+        const n = parseCountPayload(data)
+        setVisitCount(n != null ? n : null)
       })
       .catch(() => {
         if (!cancelled) setVisitCount(null)

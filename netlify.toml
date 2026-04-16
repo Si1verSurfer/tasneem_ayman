@@ -1,3 +1,11 @@
+[functions]
+  directory = "netlify/functions"
+
+[[redirects]]
+  from = "/api/visit"
+  to = "/.netlify/functions/visit"
+  status = 200
+
 # Long-lived cache for hashed assets (CDN-friendly)
 [[headers]]
   for = "/assets/*"

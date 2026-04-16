@@ -4,6 +4,17 @@ import viteCompression from 'vite-plugin-compression'
 
 // https://vite.dev/config/
 export default defineConfig({
+  server: {
+    proxy: {
+      // نفس مسار الإنتاج؛ يتجاوز حظر CORS لـ hits.dwyl أثناء التطوير
+      '/api/visit': {
+        target: 'https://hits.dwyl.com',
+        changeOrigin: true,
+        secure: true,
+        rewrite: () => '/Si1verSurfer/tasneem_ayman.json',
+      },
+    },
+  },
   plugins: [
     preact(),
     viteCompression({
